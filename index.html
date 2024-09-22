@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>CV Generator</h1>
+        <form id="cvForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="photo">Upload Photo:</label>
+            <input type="file" id="photo" accept="image/*" required>
+            
+            <label>Hobbies:</label>
+            <div>
+                <input type="radio" id="hobby1" name="hobby" value="Reading" required>
+                <label for="hobby1">Reading</label>
+            </div>
+            <div>
+                <input type="radio" id="hobby2" name="hobby" value="Traveling">
+                <label for="hobby2">Traveling</label>
+            </div>
+            <div>
+                <input type="radio" id="hobby3" name="hobby" value="Gaming">
+                <label for="hobby3">Gaming</label>
+            </div>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="experience">Experience:</label>
+            <textarea id="experience" required></textarea>
+            
+            <button type="submit">Generate CV</button>
+        </form>
+        <div id="cvOutput" class="cv-output"></div>
+        <button id="downloadBtn" style="display:none;">Download CV</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
