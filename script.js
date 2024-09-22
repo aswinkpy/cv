@@ -10,12 +10,22 @@ document.getElementById('cvForm').addEventListener('submit', function(e) {
     const photoURL = URL.createObjectURL(photoInput.files[0]);
 
     const cvOutput = `
-        <div class="cert-title">Certificate of Achievement</div>
-        <img src="${photoURL}" alt="Profile Photo">
-        <div class="cert-detail"><strong>Name:</strong> ${name}</div>
-        <div class="cert-detail"><strong>Email:</strong> ${email}</div>
-        <div class="cert-detail"><strong>Hobby:</strong> ${hobby}</div>
-        <div class="cert-detail"><strong>Experience:</strong> ${experience}</div>
+        <div class="cv-header">
+            <h2>${name}</h2>
+            <img src="${photoURL}" alt="Profile Photo">
+        </div>
+        <div class="cv-section">
+            <h3>Contact Information</h3>
+            <div class="cv-detail"><strong>Email:</strong> ${email}</div>
+        </div>
+        <div class="cv-section">
+            <h3>Hobbies</h3>
+            <div class="cv-detail">${hobby}</div>
+        </div>
+        <div class="cv-section">
+            <h3>Experience</h3>
+            <div class="cv-detail">${experience}</div>
+        </div>
     `;
     
     document.getElementById('cvOutput').innerHTML = cvOutput;
@@ -30,11 +40,11 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     const experience = document.getElementById('experience').value;
     const hobby = document.querySelector('input[name="hobby"]:checked').value;
 
-    pdf.text(20, 20, `Certificate of Achievement`);
-    pdf.text(20, 30, `Name: ${name}`);
-    pdf.text(20, 40, `Email: ${email}`);
-    pdf.text(20, 50, `Hobby: ${hobby}`);
-    pdf.text(20, 60, `Experience: ${experience}`);
+    pdf.text(20, 20, `Name: ${name}`);
+    pdf.text(20, 30, `Email: ${email}`);
+    pdf.text(20, 40, `Hobby: ${hobby}`);
+    pdf.text(20, 50, `Experience: ${experience}`);
     
     pdf.save('CV.pdf');
 });
+
