@@ -3,50 +3,50 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: linear-gradient(270deg, #2193b0, #6dd5ed);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    background: radial-gradient(circle at 50% 50%, #111, #000);
+    overflow: hidden;
 }
 
 .container {
     max-width: 700px;
     margin: auto;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     margin-top: 5%;
+    color: white;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #fff;
 }
 
 label {
     display: block;
     margin: 10px 0 5px;
-    color: #333;
+    color: #ddd;
 }
 
 input, textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #bbb;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background: #28a745;
+    background: #4a90e2;
     color: white;
     border: none;
     border-radius: 4px;
@@ -55,7 +55,7 @@ button {
 }
 
 button:hover {
-    background: #218838;
+    background: #357ab7;
 }
 
 .cv-output {
@@ -64,7 +64,8 @@ button:hover {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
 .cv-header {
@@ -74,6 +75,7 @@ button:hover {
 .cv-header img {
     max-width: 150px;
     border-radius: 50%;
+    border: 2px solid white;
 }
 
 .cv-section {
@@ -81,11 +83,41 @@ button:hover {
 }
 
 .cv-section h3 {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #444;
     padding-bottom: 5px;
+    color: #fff;
 }
 
 .cv-detail {
     margin: 10px 0;
     font-size: 16px;
+}
+
+@keyframes stars {
+    0% { background-position: 0 0; }
+    100% { background-position: -1000px 1000px; }
+}
+
+/* Moon and Stars */
+
+.moon {
+    position: absolute;
+    top: 5%;
+    left: 80%;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle at 30% 30%, #ffffff, #888);
+    border-radius: 50%;
+    box-shadow: 0 0 30px #fff;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: transparent url('https://i.imgur.com/2yTm3B8.png') repeat;
+    animation: stars 100s linear infinite;
+    z-index: -1;
 }
