@@ -1,10 +1,12 @@
+/* Starry Sky Background */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: radial-gradient(circle at 50% 50%, #111, #000);
+    background: radial-gradient(circle at 50% 50%, #000, #111);
     overflow: hidden;
+    color: #fff;
 }
 
 .container {
@@ -68,47 +70,10 @@ button:hover {
     color: white;
 }
 
-.cv-header {
-    text-align: center;
-}
-
-.cv-header img {
-    max-width: 150px;
-    border-radius: 50%;
-    border: 2px solid white;
-}
-
-.cv-section {
-    margin: 20px 0;
-}
-
-.cv-section h3 {
-    border-bottom: 1px solid #444;
-    padding-bottom: 5px;
-    color: #fff;
-}
-
-.cv-detail {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
+/* Animated Stars */
 @keyframes stars {
     0% { background-position: 0 0; }
     100% { background-position: -1000px 1000px; }
-}
-
-/* Moon and Stars */
-
-.moon {
-    position: absolute;
-    top: 5%;
-    left: 80%;
-    width: 150px;
-    height: 150px;
-    background: radial-gradient(circle at 30% 30%, #ffffff, #888);
-    border-radius: 50%;
-    box-shadow: 0 0 30px #fff;
 }
 
 .stars {
@@ -121,3 +86,4 @@ button:hover {
     animation: stars 100s linear infinite;
     z-index: -1;
 }
+
