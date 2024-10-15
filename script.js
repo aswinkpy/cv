@@ -1,63 +1,57 @@
-document.getElementById('cv-form').addEventListener('submit', function(e) {
+document.getElementById('cv-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
-    const address = document.getElementById('address').value;
     const phone = document.getElementById('phone').value;
     const email = document.getElementById('email').value;
-    const linkedin = document.getElementById('linkedin').value;
     const summary = document.getElementById('summary').value;
-    const degree = document.getElementById('degree').value;
-    const institution = document.getElementById('institution').value;
-    const eduDates = document.getElementById('edu-dates').value;
     const workExperience = document.getElementById('work-experience').value;
     const skills = document.getElementById('skills').value;
-    const certification = document.getElementById('certification').value;
-    const issuingOrg = document.getElementById('issuing-organization').value;
-    const certDate = document.getElementById('certification-date').value;
-    const projects = document.getElementById('projects').value;
-    const volunteer = document.getElementById('volunteer').value;
+    const profilePic = document.getElementById('profile-pic').files[0];
 
-    let cvContent = `
-        <h2>${name}</h2>
-        <p>${address ? address : ''} | ${phone} | ${email} | ${linkedin ? linkedin : ''}</p>
-        <h3>Professional Summary</h3>
-        <p>${summary}</p>
-        <h3>Education</h3>
-        <p>${degree}, ${institution} (${eduDates})</p>
-        <h3>Work Experience</h3>
-        <p>${workExperience}</p>
-        <h3>Skills</h3>
-        <p>${skills}</p>
-        <h3>Certifications</h3>
-        <p>${certification ? `${certification} (Issued by: ${issuingOrg}, Date: ${certDate})` : 'None'}</p>
-        <h3>Projects or Research</h3>
-        <p>${projects ? projects : 'None'}</p>
-        <h3>Volunteer Experience</h3>
-        <p>${volunteer ? volunteer : 'None'}</p>
-    `;
+    let reader = new FileReader();
+    reader.onload = function (event) {
+        let profileImgSrc = event.target.result;
 
-    document.getElementById('cv-content').innerHTML = cvContent;
-    document.getElementById('cv-output').classList.remove('hidden');
+        // Populate the CV content
+        let cvContent = `
+            <img src="${profileImgSrc}" alt="Profile Picture">
+            <h2>${name}</h2>
+            <p>Phone: ${phone} | Email: ${email}</p>
+            <h3>Summary</h3>
+            <p>${summary}</p>
+            <h3>Work Experience</h3>
+            <p>${workExperience}</p>
+            <h3>Skills</h3>
+            <p>${skills}</p>
+        `;
 
-    // Call the download function
-    downloadCV(name);
+        document.getElementById('cv-content').innerHTML = cvContent;
+        document.getElementById('cv-output').classList.remove('hidden');
+
+        // Generate and download the CV as PDF
+        downloadCV(name, profileImgSrc, cvContent);
+    };
+
+    if (profilePic) {
+        reader.readAsDataURL(profilePic);
+    } else {
+        alert("Please upload a profile picture!");
+    }
 });
 
-function downloadCV(name) {
+function downloadCV(name, profileImgSrc, cvContent) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    // Add content to the PDF
-    const content = document.getElementById('cv-content').innerHTML;
+    // Add the profile image
+    doc.addImage(profileImgSrc, 'JPEG', 10, 10, 50, 50);
 
-    // Convert HTML to PDF
-    doc.html(content, {
-        callback: function (doc) {
-            // Save the generated PDF
-            doc.save(`${name}-CV.pdf`);
-        },
-        x: 10,
-        y: 10,
+    // Add the rest of the content to the PDF
+    doc.fromHTML(cvContent, 70, 10, {
+        width: 130
     });
+
+    // Save the PDF
+    doc.save(`${name}-CV.pdf`);
 }
