@@ -10,39 +10,47 @@
 <body>
     <div class="container">
         <h1>CV Generator</h1>
-        <form id="cvForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-            
-            <label for="photo">Upload Photo:</label>
-            <input type="file" id="photo" accept="image/*" required>
-            
-            <label>Hobbies:</label>
-            <div>
-                <input type="radio" id="hobby1" name="hobby" value="Reading" required>
-                <label for="hobby1">Reading</label>
-            </div>
-            <div>
-                <input type="radio" id="hobby2" name="hobby" value="Traveling">
-                <label for="hobby2">Traveling</label>
-            </div>
-            <div>
-                <input type="radio" id="hobby3" name="hobby" value="Gaming">
-                <label for="hobby3">Gaming</label>
-            </div>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            
-            <label for="experience">Experience:</label>
-            <textarea id="experience" required></textarea>
-            
+        <form id="cv-form">
+            <h2>Personal Information</h2>
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="text" id="address" placeholder="Address (optional)">
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="text" id="linkedin" placeholder="LinkedIn Profile (optional)">
+
+            <h2>Professional Summary</h2>
+            <textarea id="summary" placeholder="Write your professional summary here..." required></textarea>
+
+            <h2>Education</h2>
+            <input type="text" id="degree" placeholder="Degree Title" required>
+            <input type="text" id="institution" placeholder="Institution Name" required>
+            <input type="text" id="edu-dates" placeholder="Graduation Dates (e.g., Month, Year)" required>
+
+            <h2>Work Experience</h2>
+            <textarea id="work-experience" placeholder="Describe your work experience..." required></textarea>
+
+            <h2>Skills</h2>
+            <textarea id="skills" placeholder="List your skills..." required></textarea>
+
+            <h2>Certifications</h2>
+            <input type="text" id="certification" placeholder="Certification Name">
+            <input type="text" id="issuing-organization" placeholder="Issuing Organization">
+            <input type="text" id="certification-date" placeholder="Date Obtained">
+
+            <h2>Projects or Research</h2>
+            <textarea id="projects" placeholder="Describe your projects or research..."></textarea>
+
+            <h2>Volunteer Experience</h2>
+            <textarea id="volunteer" placeholder="Describe your volunteer experience..."></textarea>
+
             <button type="submit">Generate CV</button>
         </form>
-        <div id="cvOutput" class="cv-output"></div>
-        <button id="downloadBtn" style="display:none;">Download CV</button>
+
+        <div id="cv-output" class="cv-output hidden">
+            <h1>Curriculum Vitae</h1>
+            <div id="cv-content"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
-
