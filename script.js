@@ -32,5 +32,30 @@ document.getElementById('cvForm').addEventListener('submit', function (e) {
 });
 
 document.getElementById('downloadBtn').addEventListener('click', function () {
-    window.print(); // Allows user to download or print the CV
+    const cvContainer = document.getElementById('cvContainer');
+
+    html2canvas(cvContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+
+        // Calculate image dimensions and add to PDF
+        const imgWidth = 190; // Adjust based on PDF size
+        const pageHeight = pdf.internal.pageSize.height;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        pdf.save('CV.pdf'); // Save the PDF with a name
+    });
 });
