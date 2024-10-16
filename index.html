@@ -5,56 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Generator</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>CV Generator</h1>
-        <form id="cv-form">
-            <h2>Personal Information</h2>
-            <input type="text" id="name" placeholder="Full Name" required>
-            <input type="text" id="address" placeholder="Address (optional)">
-            <input type="text" id="phone" placeholder="Phone Number" required>
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="text" id="linkedin" placeholder="LinkedIn Profile (optional)">
-
-            <h2>Professional Summary</h2>
-            <textarea id="summary" placeholder="Write your professional summary here..." required></textarea>
-
-            <h2>Education</h2>
-            <input type="text" id="degree" placeholder="Degree Title" required>
-            <input type="text" id="institution" placeholder="Institution Name" required>
-            <input type="text" id="edu-dates" placeholder="Graduation Dates (e.g., Month, Year)" required>
-
-            <h2>Work Experience</h2>
-            <textarea id="work-experience" placeholder="Describe your work experience..." required></textarea>
-
-            <h2>Skills</h2>
-            <textarea id="skills" placeholder="List your skills..." required></textarea>
-
-            <h2>Certifications</h2>
-            <input type="text" id="certification" placeholder="Certification Name">
-            <input type="text" id="issuing-organization" placeholder="Issuing Organization">
-            <input type="text" id="certification-date" placeholder="Date Obtained">
-
-            <h2>Projects or Research</h2>
-            <textarea id="projects" placeholder="Describe your projects or research..."></textarea>
-
-            <h2>Volunteer Experience</h2>
-            <textarea id="volunteer" placeholder="Describe your volunteer experience..."></textarea>
-            
-            <h2>photo</h2>
-            <label for="profile-pic">Upload Profile Picture:</label>
-            <input type="file" id="profile-pic" accept="image/*">
-
+        <form id="cvForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Upload Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="summary">Professional Summary</label>
+                <textarea id="summary" name="summary" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="experience">Work Experience</label>
+                <textarea id="experience" name="experience" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="education">Education</label>
+                <textarea id="education" name="education" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <textarea id="skills" name="skills" rows="3" required></textarea>
+            </div>
             <button type="submit">Generate CV</button>
         </form>
 
-        <div id="cv-output" class="cv-output hidden">
-            <h1>Curriculum Vitae</h1>
-            <div id="cv-content"></div>
+        <div id="cvContainer" class="cv-container hidden">
+            <div class="cv-header">
+                <h1 id="cvName"></h1>
+                <img id="cvPhoto" class="cv-photo" src="" alt="Profile Photo">
+            </div>
+            <div class="cv-content">
+                <p><strong>Email:</strong> <span id="cvEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="cvPhone"></span></p>
+                <p><strong>Summary:</strong> <span id="cvSummary"></span></p>
+                <p><strong>Work Experience:</strong> <span id="cvExperience"></span></p>
+                <p><strong>Education:</strong> <span id="cvEducation"></span></p>
+                <p><strong>Skills:</strong> <span id="cvSkills"></span></p>
+            </div>
+            <button id="downloadBtn">Download CV</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
