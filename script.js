@@ -1,61 +1,46 @@
-document.getElementById('cvForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+document.getElementById("cvForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent form submission
 
-    // Get form inputs
-    const fullName = document.getElementById('fullName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const summary = document.getElementById('summary').value;
-    const experience = document.getElementById('experience').value;
-    const education = document.getElementById('education').value;
-    const skills = document.getElementById('skills').value;
-    const photoFile = document.getElementById('photo').files[0];
+    // Get form values
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const summary = document.getElementById("summary").value;
+    const experience = document.getElementById("experience").value;
+    const education = document.getElementById("education").value;
+    const skills = document.getElementById("skills").value;
 
-    // Display inputs in the CV container
-    document.getElementById('cvName').textContent = fullName;
-    document.getElementById('cvEmail').textContent = email;
-    document.getElementById('cvPhone').textContent = phone;
-    document.getElementById('cvSummary').textContent = summary;
-    document.getElementById('cvExperience').textContent = experience;
-    document.getElementById('cvEducation').textContent = education;
-    document.getElementById('cvSkills').textContent = skills;
+    // Set CV content
+    document.getElementById("cvName").innerText = fullName;
+    document.getElementById("cvEmail").innerText = email;
+    document.getElementById("cvPhone").innerText = phone;
+    document.getElementById("cvSummary").innerText = summary;
+    document.getElementById("cvExperience").innerText = experience;
+    document.getElementById("cvEducation").innerText = education;
+    document.getElementById("cvSkills").innerText = skills;
 
-    // Display the uploaded photo
+    // Handle photo upload
+    const photoInput = document.getElementById("photo");
+    const file = photoInput.files[0];
     const reader = new FileReader();
-    reader.onload = function (e) {
-        document.getElementById('cvPhoto').src = e.target.result;
-    };
-    reader.readAsDataURL(photoFile);
 
-    // Show the CV container
-    document.getElementById('cvContainer').classList.remove('hidden');
+    reader.onloadend = function () {
+        document.getElementById("cvPhoto").src = reader.result;
+    };
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+
+    // Show CV container
+    document.getElementById("cvContainer").classList.remove("hidden");
 });
 
-document.getElementById('downloadBtn').addEventListener('click', function () {
-    const cvContainer = document.getElementById('cvContainer');
-
+document.getElementById("downloadBtn").addEventListener("click", function () {
+    const cvContainer = document.getElementById("cvContainer");
     html2canvas(cvContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
+        const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF();
-
-        // Calculate image dimensions and add to PDF
-        const imgWidth = 190; // Adjust based on PDF size
-        const pageHeight = pdf.internal.pageSize.height;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-
-        let position = 0;
-
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft >= 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
-
-        pdf.save('CV.pdf'); // Save the PDF with a name
+        pdf.addImage(imgData, 'PNG', 0, 0);
+        pdf.save("cv.pdf");
     });
 });
