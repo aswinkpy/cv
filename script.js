@@ -1,46 +1,44 @@
-document.getElementById("cvForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+document.getElementById('cvForm').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-    // Get form values
-    const fullName = document.getElementById("fullName").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const summary = document.getElementById("summary").value;
-    const experience = document.getElementById("experience").value;
-    const education = document.getElementById("education").value;
-    const skills = document.getElementById("skills").value;
+  const formData = new FormData(e.target);
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const phone = formData.get('phone');
+  const skills = formData.get('skills').split(',').map(skill => `<li>${skill.trim()}</li>`).join('');
+  const experience = formData.get('experience');
+  const photo = URL.createObjectURL(formData.get('photo'));
 
-    // Set CV content
-    document.getElementById("cvName").innerText = fullName;
-    document.getElementById("cvEmail").innerText = email;
-    document.getElementById("cvPhone").innerText = phone;
-    document.getElementById("cvSummary").innerText = summary;
-    document.getElementById("cvExperience").innerText = experience;
-    document.getElementById("cvEducation").innerText = education;
-    document.getElementById("cvSkills").innerText = skills;
-
-    // Handle photo upload
-    const photoInput = document.getElementById("photo");
-    const file = photoInput.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = function () {
-        document.getElementById("cvPhoto").src = reader.result;
-    };
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-
-    // Show CV container
-    document.getElementById("cvContainer").classList.remove("hidden");
-});
-
-document.getElementById("downloadBtn").addEventListener("click", function () {
-    const cvContainer = document.getElementById("cvContainer");
-    html2canvas(cvContainer).then(canvas => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF();
-        pdf.addImage(imgData, 'PNG', 0, 0);
-        pdf.save("cv.pdf");
-    });
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(`
+    <html>
+      <head>
+        <title>${name}'s CV</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          .cv-container { display: flex; justify-content: space-between; }
+          .cv-photo { width: 30%; }
+          .cv-details { width: 70%; }
+          img { max-width: 100%; border-radius: 10px; }
+        </style>
+      </head>
+      <body>
+        <div class="cv-container">
+          <div class="cv-photo">
+            <img src="${photo}" alt="Profile Photo">
+          </div>
+          <div class="cv-details">
+            <h1>${name}</h1>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <h2>Skills</h2>
+            <ul>${skills}</ul>
+            <h2>Experience</h2>
+            <p>${experience}</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `);
+  newWindow.document.close();
 });
