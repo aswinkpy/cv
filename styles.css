@@ -49,27 +49,23 @@ button:hover {
     background: #444;
     border-radius: 10px;
     display: none; /* Initially hidden */
-    display: flex;
-    justify-content: space-between; /* Aligns photo and details */
-    align-items: flex-start; /* Aligns items to the top */
+    text-align: center; /* Center align contents */
 }
 
 .cv-header {
-    display: flex;
-    justify-content: space-between; /* Aligns details and photo */
-    width: 100%;
-}
-
-.cv-details {
-    flex: 1; /* Take remaining space */
+    margin-bottom: 20px; /* Space between photo and name */
 }
 
 .cv-photo {
     width: 100px; /* Set width for passport size */
     height: 100px; /* Set height for passport size */
     object-fit: cover; /* Ensure photo covers the area */
-    border-radius: 5px; /* Optional: round edges */
-    margin-left: 20px; /* Space between details and photo */
+    border-radius: 50%; /* Make the photo circular */
+    margin: 0 auto; /* Center the photo */
+}
+
+.cv-details {
+    text-align: left; /* Left align details */
 }
 
 h1, p {
