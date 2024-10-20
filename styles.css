@@ -1,32 +1,17 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
 body {
-    background-color: #2b2b2b;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: white;
+    margin: 0;
     padding: 20px;
 }
 
 .container {
-    width: 100%;
     max-width: 600px;
-    background-color: #333;
+    margin: auto;
+    background: #333;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .form-group {
@@ -36,31 +21,61 @@ h1 {
 label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
 }
 
-input, textarea, button {
+input, textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
     border: none;
-    outline: none;
-    font-size: 16px;
+    border-radius: 5px;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .cv-container {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 20px;
-    background-color: #444;
+    background: #444;
+    border-radius: 10px;
+    display: none; /* Initially hidden */
+    display: flex;
+    justify-content: space-between; /* Aligns photo and details */
+    align-items: flex-start; /* Aligns items to the top */
+}
+
+.cv-header {
+    display: flex;
+    justify-content: space-between; /* Aligns details and photo */
+    width: 100%;
+}
+
+.cv-details {
+    flex: 1; /* Take remaining space */
+}
+
+.cv-photo {
+    width: 100px; /* Set width for passport size */
+    height: 100px; /* Set height for passport size */
+    object-fit: cover; /* Ensure photo covers the area */
+    border-radius: 5px; /* Optional: round edges */
+    margin-left: 20px; /* Space between details and photo */
+}
+
+h1, p {
+    margin: 5px 0; /* Reduce margin for better alignment */
+}
+
+.hidden {
+    display: none;
+}
